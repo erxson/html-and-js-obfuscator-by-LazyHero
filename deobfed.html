@@ -1,0 +1,39 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<b>Html and JavaScript Obfuscator by LazyHero (deobfuscated by erx)</b>
+		<br>
+		<form action="" method="post">
+			<p>Введите код:</p><textarea id="code" rows="15" cols="70"></textarea>
+			<button onclick="return sampleFunction()">Obfuscate</button>
+		</form>
+		
+		<p>Результат:</p>
+		<textarea id="otvet" rows="15" cols="70" value="6"></textarea>
+		
+		<script language="javascript">
+			function sampleFunction()
+				{ 
+				var text=document.getElementById('code').value
+				var encode = b64EncodeUnicode(text)
+				var slash = "/"
+				document.getElementById('otvet').value = '<script>'+
+				' document.write(unescape(b64DecodeUnicode("'+encode+'")));'+
+				'function b64DecodeUnicode(str) {'+
+				'return decodeURIComponent(atob(str).split("").map(function(c) {'+
+				'return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);'+
+				'}).join(""));'+
+				'}'+'<'+slash+'script>';
+
+				return false;
+			}
+			function b64EncodeUnicode(str) {
+				return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+				function toSolidBytes(match, p1) {
+					return String.fromCharCode('0x' + p1);
+				}));
+			}
+		</script>
+	</body>
+</html>
