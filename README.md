@@ -1,1 +1,1 @@
-Шалопай - обиженка.
+shalopay, unban pozaluysta(
